@@ -1,0 +1,26 @@
+//Go to http://www.nasdaqomxnordic.com/shares/historicalprices
+//Then fire below in console to get .csv
+var query = webCore.createQuery( {
+			                        Exchange: "NMF",
+			                        SubSystem: "History",
+                                                Action: "GetDataSeries",
+                             			AppendIntraDay: "no",
+                                 		}, {}, {
+						FromDate: "2020-03-27",
+						ToDate: "2020-04-27",
+						Instrument: "cse3200",
+						hi__a : "0,5,6,3,1,2,4,21,8,10,12,9,11",
+						OmitNoTrade: "true",
+						ext_xslt_lang: "en",
+						ext_xslt: "hi_csv.xsl",
+						ext_xslt_options: ",adjusted,",
+						ext_contenttype : "application/ms-excel",
+						ext_contenttypefilename : "Maersk-2020" + ".csv",
+						ext_xslt_hiddenattrs: ",iv,ip,",
+						ext_xslt_tableId: "historicalTable",
+					DefaultDecimals: "false",
+					}
+				);
+				//console.log(query);
+				$("#excelQuery").val( query );
+				$("#excelForm").attr( "action", webCore.getProxyURL("prod") ).submit();
